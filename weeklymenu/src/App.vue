@@ -1,15 +1,15 @@
 <template>
   <img alt="Vue logo" src="./assets/menu.png">
-  <p>Her kommer ukes menyen</p>
+  <WeeklyMenu/>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import WeeklyMenu from './components/WeeklyMenu.vue';
 
 @Options({
   components: {
-    HelloWorld,
+    WeeklyMenu,
   },
 })
 export default class App extends Vue {}
