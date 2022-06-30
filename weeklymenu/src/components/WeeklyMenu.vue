@@ -1,53 +1,53 @@
 <template>
   <div class="menu">
-    <WeekDay name="Mandag" :suggestion="mondaySuggestion"/>
-    <WeekDay name="Tirsdag" :suggestion="tuesdaySuggestion"/>
-    <WeekDay name="Onsdag" :suggestion="wednesdaySuggestion"/>
-    <WeekDay name="Torsdag" :suggestion="thursdaySuggestion"/>
-    <WeekDay name="Fredag" :suggestion="fridaySuggestion"/>
-    <WeekDay name="Laurdag" :suggestion="saturdaySuggestion"/>
-    <WeekDay name="Søndag" :suggestion="sundaySuggestion"/>
+    <WeekDay name="Mandag" :suggestion="mondaySuggestion" @suggestPressed="SetSuggestion(1)" />
+    <WeekDay name="Tirsdag" :suggestion="tuesdaySuggestion" @suggestPressed="SetSuggestion(2)"  />
+    <WeekDay name="Onsdag" :suggestion="wednesdaySuggestion" @suggestPressed="SetSuggestion(3)"  />
+    <WeekDay name="Torsdag" :suggestion="thursdaySuggestion" @suggestPressed="SetSuggestion(4)"  />
+    <WeekDay name="Fredag" :suggestion="fridaySuggestion" @suggestPressed="SetSuggestion(5)" />
+    <WeekDay name="Laurdag" :suggestion="saturdaySuggestion" @suggestPressed="SetSuggestion(6)" />
+    <WeekDay name="Søndag" :suggestion="sundaySuggestion" @suggestPressed="SetSuggestion(7)" />
     <button v-on:click="SetAllSuggestions()">Foreslå for alle dager</button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import WeekDay from './WeekDay.vue';
+import WeekDay from "./WeekDay.vue";
 
 export default defineComponent({
   components: { WeekDay },
-  data: function() {
-    return{
-    mondaySuggestion: "",
-    tuesdaySuggestion: "",
-    wednesdaySuggestion: "",
-    thursdaySuggestion: "",
-    fridaySuggestion: "",
-    saturdaySuggestion: "",
-    sundaySuggestion: "",
-    suggestions:[
-      "Pizza",
-      "Spagetti",
-      "Torsk",
-      "Kjøttkake",
-      "Taco",
-      "Fiskepinner",
-      "Fiskekake",
-      "Nachos",
-      "Pasta Carbonara",
-      "Kotteletter",
-      "Lasagne",
-      "Hamburger",
-      "Karbonader",
-      "Pølse i brød",
-      "Pølse m/pommes frittes",
-      "Kjøttpudding"
-    ]
-    }
+  data: function () {
+    return {
+      mondaySuggestion: "",
+      tuesdaySuggestion: "",
+      wednesdaySuggestion: "",
+      thursdaySuggestion: "",
+      fridaySuggestion: "",
+      saturdaySuggestion: "",
+      sundaySuggestion: "",
+      suggestions: [
+        "Pizza",
+        "Spagetti",
+        "Torsk",
+        "Kjøttkake",
+        "Taco",
+        "Fiskepinner",
+        "Fiskekake",
+        "Nachos",
+        "Pasta Carbonara",
+        "Kotteletter",
+        "Lasagne",
+        "Hamburger",
+        "Karbonader",
+        "Pølse i brød",
+        "Pølse m/pommes frittes",
+        "Kjøttpudding",
+      ],
+    };
   },
   methods: {
-    SetAllSuggestions(){
+    SetAllSuggestions() {
       this.mondaySuggestion = this.PickSuggestion();
       this.tuesdaySuggestion = this.PickSuggestion();
       this.wednesdaySuggestion = this.PickSuggestion();
@@ -56,11 +56,38 @@ export default defineComponent({
       this.saturdaySuggestion = this.PickSuggestion();
       this.sundaySuggestion = this.PickSuggestion();
     },
-    PickSuggestion(){
-    return this.suggestions[Math.floor(Math.random() * this.suggestions.length)]
-    }
-  }
-})
+    SetSuggestion(n: number) {
+      switch (n) {
+        case 1:
+          this.mondaySuggestion = this.PickSuggestion();
+          break;
+        case 2:
+          this.tuesdaySuggestion = this.PickSuggestion();
+          break;
+        case 3:
+          this.wednesdaySuggestion = this.PickSuggestion();
+          break;
+        case 4:
+          this.thursdaySuggestion = this.PickSuggestion();
+          break;
+        case 5:
+          this.fridaySuggestion = this.PickSuggestion();
+          break;
+        case 6:
+          this.saturdaySuggestion = this.PickSuggestion();
+          break;
+        case 7:
+          this.sundaySuggestion = this.PickSuggestion();
+          break;
+      }
+    },
+    PickSuggestion() {
+      return this.suggestions[
+        Math.floor(Math.random() * this.suggestions.length)
+      ];
+    },
+  },
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -98,6 +125,7 @@ button {
 button:hover {
   background-color: #9b9797;
   color: white;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 </style>
