@@ -4,6 +4,7 @@
     <h1 class="weekdaycontent">⇨</h1>
     <suggestion class="weekdaycontent" :name="suggestion" />
     <button v-on:click="onSuggestPressed()">Foreslå for denne dagen</button>
+    <button v-on:click="onLockPressed()">Lås</button>
   </div>
 </template>
 
@@ -20,6 +21,9 @@ export default defineComponent({
   methods:{
     onSuggestPressed(){
       this.$emit("suggestPressed");
+    },
+    onLockPressed(){
+      this.$emit("lockPressed");
     }
   }
 });

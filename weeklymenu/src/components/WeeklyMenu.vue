@@ -1,12 +1,12 @@
 <template>
   <div class="menu">
-    <WeekDay name="Mandag" :suggestion="mondaySuggestion" @suggestPressed="SetSuggestion(1)" />
-    <WeekDay name="Tirsdag" :suggestion="tuesdaySuggestion" @suggestPressed="SetSuggestion(2)"  />
-    <WeekDay name="Onsdag" :suggestion="wednesdaySuggestion" @suggestPressed="SetSuggestion(3)"  />
-    <WeekDay name="Torsdag" :suggestion="thursdaySuggestion" @suggestPressed="SetSuggestion(4)"  />
-    <WeekDay name="Fredag" :suggestion="fridaySuggestion" @suggestPressed="SetSuggestion(5)" />
-    <WeekDay name="Laurdag" :suggestion="saturdaySuggestion" @suggestPressed="SetSuggestion(6)" />
-    <WeekDay name="Søndag" :suggestion="sundaySuggestion" @suggestPressed="SetSuggestion(7)" />
+    <WeekDay name="Mandag" :suggestion="mondaySuggestion" @suggestPressed="SetSuggestion(1)" @lockPressed="SetLockPressed(1)" />
+    <WeekDay name="Tirsdag" :suggestion="tuesdaySuggestion" @suggestPressed="SetSuggestion(2)" @lockPressed="SetLockPressed(2)"/>
+    <WeekDay name="Onsdag" :suggestion="wednesdaySuggestion" @suggestPressed="SetSuggestion(3)" @lockPressed="SetLockPressed(3)"/>
+    <WeekDay name="Torsdag" :suggestion="thursdaySuggestion" @suggestPressed="SetSuggestion(4)" @lockPressed="SetLockPressed(4)"/>
+    <WeekDay name="Fredag" :suggestion="fridaySuggestion" @suggestPressed="SetSuggestion(5)" @lockPressed="SetLockPressed(5)"/>
+    <WeekDay name="Laurdag" :suggestion="saturdaySuggestion" @suggestPressed="SetSuggestion(6)" @lockPressed="SetLockPressed(6)"/>
+    <WeekDay name="Søndag" :suggestion="sundaySuggestion" @suggestPressed="SetSuggestion(7)" @lockPressed="SetLockPressed(7)"/>
     <button v-on:click="SetAllSuggestions()">Foreslå for alle dager</button>
   </div>
 </template>
@@ -26,6 +26,13 @@ export default defineComponent({
       fridaySuggestion: "",
       saturdaySuggestion: "",
       sundaySuggestion: "",
+      mondayLocked: false,
+      tuesdayLocked: false,
+      wednesdayLocked: false,
+      thursdayLocked: false,
+      fridayLocked: false,
+      saturdayLocked: false,
+      sundayLocked: false,
       suggestions: [
         "Pizza",
         "Spagetti",
@@ -48,13 +55,38 @@ export default defineComponent({
   },
   methods: {
     SetAllSuggestions() {
-      this.mondaySuggestion = this.PickSuggestion();
-      this.tuesdaySuggestion = this.PickSuggestion();
-      this.wednesdaySuggestion = this.PickSuggestion();
-      this.thursdaySuggestion = this.PickSuggestion();
-      this.fridaySuggestion = this.PickSuggestion();
-      this.saturdaySuggestion = this.PickSuggestion();
-      this.sundaySuggestion = this.PickSuggestion();
+      if(!this.mondayLocked) this.mondaySuggestion = this.PickSuggestion();
+      if(!this.tuesdayLocked) this.tuesdaySuggestion = this.PickSuggestion();
+      if(!this.wednesdayLocked) this.wednesdaySuggestion = this.PickSuggestion();
+      if(!this.thursdayLocked) this.thursdaySuggestion = this.PickSuggestion();
+      if(!this.fridayLocked) this.fridaySuggestion = this.PickSuggestion();
+      if(!this.saturdayLocked) this.saturdaySuggestion = this.PickSuggestion();
+      if(!this.sundayLocked) this.sundaySuggestion = this.PickSuggestion();
+    },
+    SetLockPressed(n: number) {
+      switch (n) {
+        case 1:
+          this.mondayLocked = !this.mondayLocked;
+          break;
+        case 2:
+          this.tuesdayLocked = !this.tuesdayLocked;
+          break;
+        case 3:
+          this.wednesdayLocked = !this.wednesdayLocked;
+          break;
+        case 4:
+          this.thursdayLocked = !this.thursdayLocked;
+          break;
+        case 5:
+          this.fridayLocked = !this.fridayLocked;
+          break;
+        case 6:
+          this.saturdayLocked = !this.saturdayLocked;
+          break;
+        case 7:
+          this.sundayLocked = !this.sundayLocked;
+          break;
+      }
     },
     SetSuggestion(n: number) {
       switch (n) {
