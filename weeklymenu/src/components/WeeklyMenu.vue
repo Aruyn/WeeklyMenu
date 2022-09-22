@@ -13,10 +13,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import axios from "axios";
 import WeekDay from "./WeekDay.vue";
 
 export default defineComponent({
   components: { WeekDay },
+  async mounted(){
+    let result = await axios.get("https://www.themealdb.com/api/json/v1/1/filter.php?a=British");
+    result.data.meals.forEach((m: { strMeal: string; }) => {
+       this.suggestions.push(m.strMeal);
+    });
+  },
   data: function () {
     return {
       mondaySuggestion: "",
